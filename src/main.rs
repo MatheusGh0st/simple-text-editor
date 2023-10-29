@@ -40,3 +40,10 @@ fn main() -> Result<(), Error> {
 
     Ok(())
 }
+
+fn delete_file(file_path: &str) -> Result<(), Error> {
+    fs::remove_file(file_path)?;
+
+    println!("File deleted!");
+    Ok(())
+}
