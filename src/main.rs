@@ -1,7 +1,8 @@
 use std::env;
+use std::io::{Error};
 
-fn main() -> Result<(), io::Error> {
-    let args: Vec<String> = env.args().collect();
+fn main() -> Result<(), Error> {
+    let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 {
         println!("Usage: {} <file>", args[0]);
@@ -9,4 +10,6 @@ fn main() -> Result<(), io::Error> {
     }
 
     let filename = &args[1];
+
+    Ok(())
 }
