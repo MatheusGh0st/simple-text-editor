@@ -2,7 +2,8 @@ use std::env;
 use std::process;
 use std::fs;
 use std::io;
-use std::io::{Error};
+use std::io::{Error, Read};
+use std::fs::OpenOptions;
 
 fn main() -> Result<(), Error> {
     let args: Vec<String> = env::args().collect();
@@ -26,7 +27,10 @@ fn main() -> Result<(), Error> {
 
         match input.trim() {
             "i" => {}
-            "r" => {}
+            "r" => {
+                let _ = read_file(&filename);
+                break;
+            }
             "d" => {}
             "q" => {
                 println!("Exit");
@@ -37,6 +41,20 @@ fn main() -> Result<(), Error> {
             }
         }
     }
+
+    Ok(())
+}
+
+fn read_file(file_path: &str) -> Result<(), Error> {
+    let mut file = OpenOptions::new()
+        .read(true)
+        .open(&file_path)?;
+    
+    let mut buffer = String::new();
+
+    file.read_to_string(&mut buffer)?;
+
+    println!("Content: {}", buffer);
 
     Ok(())
 }
